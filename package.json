@@ -1,0 +1,29 @@
+{
+  "name": "efty-pay-nodejs-sdk",
+  "version": "1.0.0",
+  "description": "The Efty Pay Node.js SDK for secure and transparent domain name transactions.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eftybv/efty-pay-nodejs-sdk.git"
+  },
+  "main": "index.js",
+  "types": "index.d.ts",
+  "keywords": [
+    "efty",
+    "sdk",
+    "nodejs",
+    "grpc",
+    "typescript",
+    "payments"
+  ],
+  "author": "Efty B.V.",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.12"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.12",
+    "@types/node": "^20.6.0",
+    "typescript": "^5.2.2"
+  }
+}

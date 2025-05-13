@@ -42,7 +42,7 @@ yarn add git+https://github.com/eftybv/efty-pay-nodejs-sdk.git#v1.0.0
 The methods in the SDK require you to pass an auth token that contains a JWT. Below is an example of how to generate the token and pass it into the request.
 
 Token generation:
-```nodejs
+```js
 const jwt = require('jsonwebtoken');
 
 function generateToken() {
@@ -63,23 +63,38 @@ function generateToken() {
 ```
 
 Injecting the token in the gRPC client:
-```nodejs
+```js
+// examples/createTransaction.js
 const grpc = require('@grpc/grpc-js');
-const { TransactionsClient } = require('./generated/transactions_grpc_pb');
+const { generateToken } = require('./helpers');
+const { Id, TransactionsClient } = require('efty-pay-nodejs-sdk');
+require('dotenv').config();
 
-const token = generateToken();
+console.log('Getting transaction...');
 
+// Create gRPC client
+const client = new TransactionsClient(
+        process.env.EFTY_PAY_API_URL,
+        grpc.credentials.createSsl()
+);
+
+// Prepare metadata with JWT token
 const metadata = new grpc.Metadata();
-metadata.add('authorization', token);
+metadata.add('Authorization', generateToken());
 
-const client = new TransactionsClient('api.eftypay.com:443', grpc.credentials.createSsl());
+console.log(metadata);
 
-client.someMethod(request, metadata, (err, response) => {
-    if (err) {
-        console.error('Error:', err);
-    } else {
-        console.log('Response:', response);
-    }
+// Create an Id object
+const transactionId = new Id();
+transactionId.setId('1IOefXThiDx5OV6YGAwrs8');
+
+// Call getTransaction
+client.getTransactionById(transactionId, metadata, (err, response) => {
+  if (err) {
+    console.error('Error fetching transaction:', err);
+  } else {
+    console.log('Transaction details:', response.toObject());
+  }
 });
 ```
 

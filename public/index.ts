@@ -10,7 +10,7 @@ export * from './payments/payment_pb';
 export * from './payments/payments_service_grpc_pb';
 export * from './payments/payments_service_pb';
 export * from './payments/mangopay/checkout_pb';
-export { Address as OnboardingAddress , MangopayOnboarding, OnboardingType, LegalUserType, KycDocumentType, IdentityProofType } from './payments/mangopay/onboarding_pb';
+export { OnboardingType, LegalUserType, KycDocumentType, IdentityProofType, LegalUser, Person, UboDeclaration, Ubo, BirthPlace, KycDocument, MangopayOnboarding, Address as OnboardingAddress } from './payments/mangopay/onboarding_pb';
 export * from './transactions/transaction_pb';
 export * from './transactions/transactions_service_grpc_pb';
 export * from './transactions/transactions_service_pb';
